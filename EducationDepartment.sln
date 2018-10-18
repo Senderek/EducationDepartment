@@ -3,9 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EXT", "EXT", "{FBC86DFF-1458-427C-9715-B32A34470F41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{6B7D193B-FBFC-4015-90D0-E67B66D1245F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationDepartment.EXT.ASP", "src\EducationDepartment.EXT.ASP\EducationDepartment.EXT.ASP.csproj", "{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9} = {FBC86DFF-1458-427C-9715-B32A34470F41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA852906-F399-4E5B-8AF9-41D48E254037}
