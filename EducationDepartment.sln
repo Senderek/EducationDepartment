@@ -7,7 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EXT", "EXT", "{FBC86DFF-145
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{6B7D193B-FBFC-4015-90D0-E67B66D1245F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationDepartment.EXT.ASP", "src\EducationDepartment.EXT.ASP\EducationDepartment.EXT.ASP.csproj", "{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EducationDepartment.EXT.ASP", "src\EducationDepartment.EXT.ASP\EducationDepartment.EXT.ASP.csproj", "{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "EducationDepartment.EXT.Vue", "src\EducationDepartment.EXT.Vue\EducationDepartment.EXT.Vue.njsproj", "{8706063E-E0D8-4B66-B2A2-338AD69FAE0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,12 +21,17 @@ Global
 		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8706063E-E0D8-4B66-B2A2-338AD69FAE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8706063E-E0D8-4B66-B2A2-338AD69FAE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8706063E-E0D8-4B66-B2A2-338AD69FAE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8706063E-E0D8-4B66-B2A2-338AD69FAE0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{954907D5-EC06-4A44-ADC2-D7B2FE9168F9} = {FBC86DFF-1458-427C-9715-B32A34470F41}
+		{8706063E-E0D8-4B66-B2A2-338AD69FAE0B} = {FBC86DFF-1458-427C-9715-B32A34470F41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA852906-F399-4E5B-8AF9-41D48E254037}
