@@ -11,8 +11,16 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<ArticleType> ArticleTypes { get; set; }
+        public DbSet<Field> Fields { get; set; }
+        public DbSet<FieldType> FieldTypes { get; set; }
+        public DbSet<ArticleTypeFieldType> ArticleTypeFieldTypes { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
+
         }
 
         public override int SaveChanges()
