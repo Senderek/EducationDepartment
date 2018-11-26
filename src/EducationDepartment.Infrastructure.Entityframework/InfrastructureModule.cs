@@ -12,6 +12,7 @@ namespace EducationDepartment.Infrastructure.Entityframework
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<NoficiationRepository>().As<INoficiationRepository>().InstancePerLifetimeScope();
             builder.RegisterType<JwtFactory>().As<IJwtFactory>().SingleInstance();
             builder.RegisterType<MailSender>().As<IMailSender>().InstancePerLifetimeScope();
         }

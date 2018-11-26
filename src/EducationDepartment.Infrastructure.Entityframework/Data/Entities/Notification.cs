@@ -15,9 +15,9 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.Entities
         public string Content { get; set; }
         [Column]
         [Required]
-        private String DestinationsAsString { get; set; }
+        public string DestinationsAsString { get; set; }
         [NotMapped]
-        public List<String> Destinations
+        public List<string> Destinations
         {
             get { return DestinationsAsString.Split(';').ToList(); }
             set

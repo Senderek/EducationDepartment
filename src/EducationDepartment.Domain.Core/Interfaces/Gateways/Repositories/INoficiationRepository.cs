@@ -8,8 +8,8 @@ namespace EducationDepartment.Domain.Core.Interfaces.Gateways.Repositories
 {
     public interface INoficiationRepository
     {
-        Task SaveNotification();
-        Task<Notification> GetAllNotifications();
+        Task SaveNotification(NotificationM notification);
+        Task<List<NotificationM>> GetAllNotifications();
 
     }
 }

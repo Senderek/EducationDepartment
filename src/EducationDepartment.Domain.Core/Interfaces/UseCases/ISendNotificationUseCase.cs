@@ -10,6 +10,6 @@ namespace EducationDepartment.Domain.Core.Interfaces.UseCases
 {
     public interface ISendNotificationUseCase : IUseCaseRequestHandler<SendNotificationRequest, SendNotificationResponse>
     {
-        Task<Notification> GetNotifications();
+        Task<List<NotificationM>> GetNotifications();
     }
 }

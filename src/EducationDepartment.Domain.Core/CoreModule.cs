@@ -11,6 +11,7 @@ namespace EducationDepartment.Domain.Core
             builder.RegisterType<RegisterUserUseCase>().As<IRegisterUserUseCase>().InstancePerLifetimeScope();
             builder.RegisterType<LoginUseCase>().As<ILoginUseCase>().InstancePerLifetimeScope();
             builder.RegisterType<FacebookLoginUseCase>().As<IFacebookLoginUseCase>().InstancePerLifetimeScope();
+            builder.RegisterType<NotificationsUseCase>().As<ISendNotificationUseCase>().InstancePerLifetimeScope();
 
         }
     }

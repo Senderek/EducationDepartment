@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EducationDepartment.EXT.ASP.Controllers
 {
+    [Route("api/[controller]/[action]")]
     public class NotificationController : ControllerBase
     {
         private readonly ISendNotificationUseCase _notificationUseCase;
@@ -18,6 +19,7 @@ namespace EducationDepartment.EXT.ASP.Controllers
             _notificationUseCase = notificationUseCase;
         }
 
+        [HttpPost]
         public async Task<IActionResult> SendNotificationToAll(string notificationMessage, string notificationSubject)
         {
             if (!ModelState.IsValid)
@@ -28,6 +30,7 @@ namespace EducationDepartment.EXT.ASP.Controllers
             return Ok();
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetAllNotifications()
         {
             return Ok(await _notificationUseCase.GetNotifications());

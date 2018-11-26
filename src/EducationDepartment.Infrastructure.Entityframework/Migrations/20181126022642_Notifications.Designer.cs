@@ -4,14 +4,16 @@ using EducationDepartment.Infrastructure.Entityframework.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EducationDepartment.Infrastructure.Entityframework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181126022642_Notifications")]
+    partial class Notifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,9 +200,6 @@ namespace EducationDepartment.Infrastructure.Entityframework.Migrations
                     b.Property<string>("Content");
 
                     b.Property<DateTime>("Created");
-
-                    b.Property<string>("DestinationsAsString")
-                        .IsRequired();
 
                     b.Property<DateTime>("Modified");
 

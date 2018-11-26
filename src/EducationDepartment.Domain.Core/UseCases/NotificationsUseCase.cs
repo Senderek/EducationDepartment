@@ -30,7 +30,7 @@ namespace EducationDepartment.Domain.Core.UseCases
             await _mailSenderSrv.SendMail(message.MessageContent, message.MessageSubject, await _userRepository.GetAllMails());
             return true;
         }
-        public async Task<Notification> GetNotifications()
+        public async Task<List<NotificationM>> GetNotifications()
         {
             var result = await _ntfRepository.GetAllNotifications();
             return result;
