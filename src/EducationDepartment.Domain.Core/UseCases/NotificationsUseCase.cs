@@ -27,7 +27,10 @@ namespace EducationDepartment.Domain.Core.UseCases
         }
         public async Task<bool> Handle(SendNotificationRequest message, IOutputPort<SendNotificationResponse> outputPort)
         {
-            await _mailSenderSrv.SendMail(message.MessageContent, message.MessageSubject, await _userRepository.GetAllMails());
+            var destinations = await _userRepository.GetAllMails();
+            var _not = new NotificationM(message.MessageContent, message.MessageSubject, destinations);
+            await _mailSenderSrv.SendMail(message.MessageContent, message.MessageSubject, destinations);
+            await _ntfRepository.SaveNotification(_not);
             return true;
         }
         public async Task<List<NotificationM>> GetNotifications()

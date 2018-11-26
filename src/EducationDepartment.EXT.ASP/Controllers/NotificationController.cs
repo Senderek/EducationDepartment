@@ -22,11 +22,18 @@ namespace EducationDepartment.EXT.ASP.Controllers
         [HttpPost]
         public async Task<IActionResult> SendNotificationToAll(string notificationMessage, string notificationSubject)
         {
-            if (!ModelState.IsValid)
-            { // re-render the view when validation failed.
-                return BadRequest("Bad model");
+            try
+            {
+                if (!ModelState.IsValid)
+                { // re-render the view when validation failed.
+                    return BadRequest("Bad model");
+                }
+                await _notificationUseCase.Handle(new SendNotificationRequest(notificationMessage, notificationSubject), null);
             }
-            await _notificationUseCase.Handle(new SendNotificationRequest(notificationMessage, notificationSubject), null);
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
             return Ok();
         }
 

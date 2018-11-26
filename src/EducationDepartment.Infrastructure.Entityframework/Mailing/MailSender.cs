@@ -23,18 +23,18 @@ namespace EducationDepartment.Infrastructure.Entityframework.Mailing
                 EnableSsl = true,
                 Credentials = new NetworkCredential(senderAdress, senderPassword)
             };
-
+            var senderAdr = new MailAddress(senderAdress);
             using (var message = new MailMessage()
             {
-                From = new MailAddress(senderAdress),
+                From = senderAdr,
                 Subject = messageContent,
                 Body = messageContent
             })
             {
-                foreach(var destination in destinations)
+                message.To.Add(senderAdr);
+                foreach (var destination in destinations)
                 {
                     message.To.Add(destination);
-
                 }
                 await smtpClient.SendMailAsync(message);
             }
