@@ -16,6 +16,7 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
         public DbSet<Field> Fields { get; set; }
         public DbSet<FieldType> FieldTypes { get; set; }
         public DbSet<ArticleTypeFieldType> ArticleTypeFieldTypes { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions options) : base(options)

@@ -7,7 +7,8 @@ using EducationDepartment.Domain.Core.Dto;
 using EducationDepartment.Domain.Core.Dto.GatewayResponses.Repositories;
 using EducationDepartment.Domain.Core.Interfaces.Gateways.Repositories;
 using EducationDepartment.Infrastructure.Entityframework.Data.Entities;
-
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramework.Repositories
 {
@@ -57,6 +58,11 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
         {
             return _mapper.Map<User>(await _userManager.FindByEmailAsync(email));
 
+        }
+
+        public async Task<List<string>> GetAllMails()
+        {
+            return await _userManager.Users.Select(x => x.Email).ToListAsync();
         }
     }
 }
