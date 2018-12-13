@@ -1,12 +1,12 @@
 <template>
-  <div class="educationDepartment">
-  EDUCATION DEPARTMENT
+  <div class="publications">
+    <h1 class="page-header">Publikacje</h1>
   </div>
 </template>
 
 <script>
   export default {
-  name: 'EducationDepartment',
+  name: 'publications',
   data(){
   return{}
   }

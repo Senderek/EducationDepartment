@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-import EducationDepartment from './components/EducationDepartment';
+import Publications from './components/Publications';
 import Article from './components/Article';
 import Book from './components/Book';
 import ConferenceArticle from './components/ConferenceArticle';
@@ -10,7 +10,9 @@ import PartOfBook from './components/PartOfBook';
 import Patent from './components/Patent';
 import Raport from './components/Raport';
 import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';   
+import SignUp from './components/SignUp';
+import ChangePassword from './components/ChangePassword';
+import UserEdit from './components/UserEdit';
  
 
 
@@ -21,7 +23,7 @@ const router = new VueRouter({
     mode: 'history',
     base: __dirname,
     routes: [
-        { path: '/', component: EducationDepartment },
+        { path: '/', component: Publications },
         { path: '/article/new', component: Article },
         { path: '/book/new', component: Book },
         { path: '/conferenceArticle/new', component: ConferenceArticle },
@@ -29,7 +31,9 @@ const router = new VueRouter({
         { path: '/patent/new', component: Patent },
         { path: '/raport/new', component: Raport },
         { path: '/signIn', component: SignIn },
-        { path: '/signUp', component: SignUp }
+        { path: '/signUp', component: SignUp },
+        { path: '/changePassword', component: ChangePassword },
+        { path: '/userEdit', component: UserEdit }
  
     ]
 
@@ -40,66 +44,64 @@ new Vue({
     router,
     template: `<div id="app">
  
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">NOWA PUBLIKACJA</a>
-        
-        
-      
-
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <router-link to="/signIn" class="nav-link">Zaloguj</router-link>
-        </li>
-      </ul>
  
 
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      
+        <router-link to="/">
+        <button type="button" class="btn mr-2">Publikacje</button>
+       </router-link>
+        
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+         
+                <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Dodaj
+                </button>
+                <div class="dropdown-menu">
+          
+      
+          
+              <router-link to="/book/new" class="dropdown-item">Ksiazka</router-link>
+              <router-link to="/partOfBook/new" class="dropdown-item">Czesc ksiazki</router-link>
+              <router-link to="/article/new" class="dropdown-item">Artyku³</router-link>
+              <router-link to="/conferenceArticle/new" class="dropdown-item">Material konferencyjny</router-link>
+              <router-link to="/raport/new" class="dropdown-item">Raport</router-link>
+              <router-link to="/patent/new" class="dropdown-item">Patent</router-link>
+           </div>
+</div>
+           
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+      <router-link to="/SignIn">
+        <button type="button" class="btn btn-primary mr-2">Zaloguj</button>
+       </router-link>
+
+        <router-link to="/SignUp">
+        <button type="button" class="btn btn-primary mr-2">Zarejestruj</button>
+       </router-link>
+           
+        </form>
+      </div>
     </nav>
 
-<div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-                 
-              <li class="nav-item">
-               <router-link to="/book/new" class="nav-link">Ksiazka</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/partOfBook/new" class="nav-link">Czesc ksiazki</router-link>
-              </li>
-              <li class="nav-item">
-                
-                
-                  <router-link to="/article/new" class="nav-link">Artykul</router-link>
-                
-              </li>
-              <li class="nav-item">
-                
-                   
-                  <router-link to="/conferenceArticle/new" class="nav-link">Material konferencyjny</router-link>
-                
-              </li>
-              <li class="nav-item">
-                 
-                  
-                  <router-link to="/raport/new" class="nav-link">Raport</router-link>
-                
-              </li>
-              <li class="nav-item">
-               <router-link to="/patent/new" class="nav-link">Patent</router-link>
-              </li>
-</ul>
-          </div>
-        </nav>
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-           <router-view></router-view>
-           
+   <div style="margin: 20 px">
 
-          
-</main>
-</div>
-       </div>
+<main role="main" class="container">
+
+      <div class="starter-template">
+ <router-view></router-view>
+      </div>
+
+    </main><!-- /.container -->
+           
+           
+ </div>
     
                </div>
 `

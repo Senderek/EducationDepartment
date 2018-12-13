@@ -37,16 +37,22 @@
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="src\App.vue" />
+    <Content Include="src\components\Alert.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\Article.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\Book.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\ChangePassword.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\ConferenceArticle.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\components\EducationDepartment.vue" />
+    <Content Include="src\components\Publications.vue" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="src\components\PartOfBook.vue">
@@ -62,6 +68,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\SignUp.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\UserEdit.vue">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
