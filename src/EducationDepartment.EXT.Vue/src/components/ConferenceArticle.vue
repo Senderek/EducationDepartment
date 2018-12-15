@@ -1,42 +1,41 @@
 ﻿<template>
   <div class="conferenceArticle">
+    <Alert v-if="alert" v-bind:message="alert" />
     <h3>Dodaj materiał konferencyjny</h3>
 
-    <form style ="margin-top:20px">
+    <form style ="margin-top:20px" v-on:submit="addConferenceArticle">
       <div class="form-group">
         <label for="autorImput">Autor</label>
-        <input type="text" class="form-control" id="autorImput" placeholder="autor">
+        <input type="text" class="form-control"   placeholder="autor" v-model="conferenceArticle.autor">
           </br>
 
           <label for="titleImput">Tytuł</label>
-          <input type="text" class="form-control" id="titleImput" placeholder="tytuł">
+          <input type="text" class="form-control"   placeholder="tytuł" v-model="conferenceArticle.title">
             </br>
 
             <label for="descriptionBook">Opis</label>
             </br>
-            <textarea class="form-control" id="descriptionBook" rows="5"></textarea>
+            <textarea class="form-control"  v-model="conferenceArticle.description" rows="5"></textarea>
             </br>
 
             <label for="example-date-input"  >Data</label>
             </br>
 
-            <input class="form-control" type="date" value="2018-11-19" id="example-date-input">
+            <input class="form-control" type="date" value="2018-12-19"  v-model="conferenceArticle.date">
               </br>
 
               <label for="conferenceImput">Konferencja</label>
-              <input type="text" class="form-control" id="conferenceImput" placeholder="konferencja">
+              <input type="text" class="form-control"   placeholder="konferencja" v-model="conferenceArticle.conference">
                 </br>
 
 
 
 
                 <label for="cityImput">Miasto</label>
-                <input type="text" class="form-control" id="cityImput" placeholder="miasto">
+                <input type="text" class="form-control"   placeholder="miasto" v-model="conferenceArticle.city">
                   </br>
 
-                  <label for="publisherImput">Wydawca</label>
-                  <input type="text" class="form-control" id="publisherImput" placeholder="wydawca">
-                    </br>
+                  
 
 
 
@@ -73,10 +72,47 @@
 </template>
 
 <script>
+  import Alert from "./Alert"
   export default {
   name: 'ConferenceArticle',
   data(){
-  return{}
+  return {
+  conferenceArticle: {},
+  alert: ""
+  }
+  },
+  methods: {
+  addConferenceArticle(e) {
+  if (
+  !this.conferenceArticle.autor ||
+  !this.conferenceArticle.title
+  ) {
+  this.alert = "Autor i tytuł to pola wymagane";
+  } else {
+  let newConferenceArticle = {
+  Autor: this.conferenceArticle.autor,
+  Title: this.conferenceArticle.title,
+  Description: this.conferenceArticle.description,
+  Date: this.conferenceArticle.date,
+  City: this.conferenceArticle.city,
+  Conference: this.conferenceArticle.conference
+
+
+
+
+  }
+  this.$http.post('http://localhost:50906/api/accounts', newConferenceArticle)
+  .then(function(response){
+  this.$router.push({path: '/', query: {alert: 'Dodano materiał konferencyjny'}});
+  });
+
+  e.preventDefault();
+  }
+  e.preventDefault();
+  }
+  },
+  components: {
+  Alert
   }
   };
 </script>

@@ -1,26 +1,27 @@
 ﻿<template>
   <div class="raport">
+    <Alert v-if="alert" v-bind:message="alert" />
     <h3>Dodaj raport  </h3>
 
-    <form style ="margin-top:20px">
+    <form style ="margin-top:20px" v-on:submit="addRaport">
       <div class="form-group">
         <label for="autorImput">Autor</label>
-        <input type="text" class="form-control" id="autorImput" placeholder="autor">
+        <input type="text" class="form-control"   placeholder="autor" v-model="raport.autor">
           </br>
 
           <label for="titleImput">Tytuł</label>
-          <input type="text" class="form-control" id="titleImput" placeholder="tytuł">
+          <input type="text" class="form-control"   placeholder="tytuł" v-model="raport.title">
             </br>
 
             <label for="descriptionBook">Opis</label>
             </br>
-            <textarea class="form-control" id="descriptionBook" rows="5"></textarea>
+            <textarea class="form-control" v-model="raport.description" rows="5"></textarea>
             </br>
 
             <label for="example-date-input"  >Data</label>
             </br>
 
-            <input class="form-control" type="date" value="2018-11-19" id="example-date-input">
+            <input class="form-control" type="date" value="2018-12-19" v-model="raport.date">
               </br>
 
               
@@ -29,11 +30,11 @@
 
 
                 <label for="cityImput">Miasto</label>
-                <input type="text" class="form-control" id="cityImput" placeholder="miasto">
+                <input type="text" class="form-control"  placeholder="miasto" v-model="raport.city">
                   </br>
 
                   <label for="publisherImput">Wydawca</label>
-                  <input type="text" class="form-control" id="publisherImput" placeholder="wydawca">
+                  <input type="text" class="form-control"   placeholder="wydawca" v-model="raport.publisher">
                     </br>
 
 
@@ -71,10 +72,48 @@
 </template>
 
 <script>
+  import Alert from "./Alert"
   export default {
   name: 'Raport',
   data(){
-  return{}
+  return {
+  raport: {},
+  alert: ""
+  }
+  },
+  methods: {
+  addRaport(e) {
+  if (
+  !this.raport.autor ||
+  !this.raport.title
+  ) {
+  this.alert = "Autor i tytuł to pola wymagane";
+  } else {
+  let newRaport = {
+  Autor: this.raport.autor,
+  Title: this.raport.title,
+  Description: this.raport.description,
+  Publisher: this.raport.publisher,
+  Date: this.raport.date,
+  City: this.raport.city
+
+
+
+
+
+  }
+  this.$http.post('http://localhost:50906/api/accounts', newRaport)
+  .then(function(response){
+  this.$router.push({path: '/', query: {alert: 'Dodano raport'}});
+  });
+
+  e.preventDefault();
+  }
+  e.preventDefault();
+  }
+  },
+  components: {
+  Alert
   }
   };
 </script>

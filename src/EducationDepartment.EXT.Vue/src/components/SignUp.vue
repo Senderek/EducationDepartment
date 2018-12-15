@@ -1,31 +1,32 @@
 ﻿<template>
   <div class="signUp">
-    
-        
 
+    <Alert v-if="alert" v-bind:message="alert" />
+    <h1 class="h3 mb-3 font-weight-normal">Rejestracja</h1>
+    <form v-on:submit="createAccount">
       <div class="form-group">
-        <h1 class="h3 mb-3 font-weight-normal">Rejestracja</h1>
+
         <label for="login">Login</label>
-        <input type="text" class="form-control" id="loginSU" placeholder="login">
+        <input type="text" class="form-control" placeholder="login" v-model="account.login">
   </div>
       <div class="form-group">
         <label for="password">Hasło</label>
-        <input type="password" class="form-control" id="passwordSU" placeholder="hasło">
+        <input type="password" class="form-control" placeholder="hasło" v-model="account.password">
   </div>
 
       <div class="form-group">
         <label for="passwordSUrepet">Powtórz hasło</label>
-        <input type="password" class="form-control" id="passwordSUrepet" placeholder="powtórzone hasło">
+        <input type="password" class="form-control"   placeholder="powtórzone hasło" v-model="account.passwordRepeat">
   </div>
 
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="name">Imię</label>
-          <input type="text" class="form-control" id="nameSU" placeholder="imię">
+          <input type="text" class="form-control"   placeholder="imię" v-model="account.firstname">
     </div>
         <div class="form-group col-md-6">
           <label for="lastname">Nazwisko</label>
-          <input type="text" class="form-control" id="lastnameSU" placeholder="nazwisko">
+          <input type="text" class="form-control"  placeholder="nazwisko" v-model="account.lastname">
     </div>
       </div>
       <label for="deegres">Stopień naukowy</label>
@@ -54,7 +55,7 @@
 
       <div class="form-group">
         <label for="emailSU">Email</label>
-        <input type="email" class="form-control" id="emailSU" placeholder="email">
+        <input type="email" class="form-control"   placeholder="email" v-model="account.email">
   </div>
 
       <div class="form-row">
@@ -67,20 +68,56 @@
           <input type="text" class="form-control" id="faxSU" placeholder="fax">
     </div>
       </div>
-      
-       
+
+
       <button type="submit" class="btn btn-lg btn-primary btn-block">Załóż konto</button>
     </form>
-    
+
 
   </div>
 </template>
 
 <script>
+  import Alert from "./Alert"
   export default {
-  name: 'SingUp',
-  data(){
-  return{}
+  name: "SingUp",
+  data() {
+  return {
+  account: {},
+  alert: ""
+  }
+  },
+  methods: {
+  createAccount(e) {
+  if (
+  !this.account.login ||
+  !this.account.password ||
+  !this.account.passwordRepeat ||
+  !this.account.email ||
+  !this.account.firstname ||
+  !this.account.lastname
+  ) {
+  this.alert = "Wypełnij wszystkie wymagane pola";
+  } else {
+  let newAccount = {
+  FirstName: this.account.firstname,
+  LastName: this.account.lastname,
+  Email: this.account.email,
+  UserName: this.account.login,
+  Password: this.account.password
+  }
+  this.$http.post('http://localhost:50906/api/accounts', newAccount)
+  .then(function(response){
+  this.$router.push({path: '/', query: {alert: 'Konto utworzone'}});
+  });
+
+  e.preventDefault();
+  }
+  e.preventDefault();
+  }
+  },
+  components: {
+  Alert
   }
   };
 </script>

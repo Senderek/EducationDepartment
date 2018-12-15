@@ -1,41 +1,42 @@
 ﻿<template>
-  <div class="patent">
+  <div class="PatentT">
+    <Alert v-if="alert" v-bind:message="alert" />
     <h3>Dodaj patent</h3>
 
-    <form style ="margin-top:20px">
+    <form style ="margin-top:20px" v-on:submit="addPatent">
       <div class="form-group">
         <label for="autorImput">Wynalazca</label>
-        <input type="text" class="form-control" id="autorImput" placeholder="wynalazca">
+        <input type="text" class="form-control"   placeholder="wynalazca"  v-model="patent.inventor">
           </br>
 
           <label for="titleImput">Tytuł</label>
-          <input type="text" class="form-control" id="titleImput" placeholder="tytuł">
+          <input type="text" class="form-control"   placeholder="tytuł"  v-model="patent.title">
             </br>
 
             <label for="descriptionBook">Opis</label>
             </br>
-            <textarea class="form-control" id="descriptionBook" rows="5"></textarea>
+            <textarea class="form-control" v-model="patent.description" rows="5"></textarea>
             </br>
 
             <label for="example-date-input"  >Data</label>
             </br>
 
-            <input class="form-control" type="date" value="2018-11-19" id="example-date-input">
+            <input class="form-control" type="date" value="2018-12-19" v-model="patent.date">
               </br>
 
               <label for="areaInput">Kraj/region</label>
-              <input type="text" class="form-control" id="areaInput" placeholder="kraj/region">
+              <input type="text" class="form-control"  placeholder="kraj/region" v-model="patent.region">
                 </br>
 
                 <label for="numberOfPatentInput">Numer patentu</label>
-                <input type="text" class="form-control" id="numberOfPatentInput" placeholder="numer patentu">
+                <input type="text" class="form-control"   placeholder="numer patentu" v-model="patent.number">
                   </br>
 
 
 
 
                 <label for="cityImput">Miasto</label>
-                <input type="text" class="form-control" id="cityImput" placeholder="miasto">
+                <input type="text" class="form-control"   placeholder="miasto" v-model="patent.city">
                   </br>
 
                
@@ -75,10 +76,48 @@
 </template>
 
 <script>
+  import Alert from "./Alert"
   export default {
   name: 'Patent',
   data(){
-  return{}
+  return {
+  patent: {},
+  alert: ""
+  }
+  },
+  methods: {
+  addPatent(e) {
+  if (
+  !this.patent.inventor ||
+  !this.patent.title
+  ) {
+  this.alert = "Wynalazca i tytuł to pola wymagane";
+  } else {
+  let newPatent = {
+  Inventor: this.patent.inventor,
+  Title: this.patent.title,
+  Description: this.patent.description,
+  Region: this.patent.region,
+  Date: this.patent.date,
+  City: this.patent.city,
+  Number: this.patent.number
+
+
+
+
+  }
+  this.$http.post('http://localhost:50906/api/accounts', newPatent)
+  .then(function(response){
+  this.$router.push({path: '/', query: {alert: 'Dodano patent'}});
+  });
+
+  e.preventDefault();
+  }
+  e.preventDefault();
+  }
+  },
+  components: {
+  Alert
   }
   };
 </script>
