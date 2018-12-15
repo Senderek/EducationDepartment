@@ -48,6 +48,8 @@ namespace EducationDepartment.EXT.ASP
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default"), b => b.MigrationsAssembly("EducationDepartment.Infrastructure.Entityframework")));
 
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
@@ -108,6 +110,18 @@ namespace EducationDepartment.EXT.ASP
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    bdr =>
+                    {
+                        bdr
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
+
             services.AddAutoMapper();
 
             services.AddSwaggerGen(c =>
@@ -135,6 +149,7 @@ namespace EducationDepartment.EXT.ASP
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("AllowAll");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
