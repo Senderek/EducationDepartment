@@ -1,22 +1,13 @@
 ﻿<template>
-  <div class="signUp">
-    
-        
+  <div class="userEdit">
+    <form  style ="margin-top:20px">
 
       <div class="form-group">
-        <h1 class="h3 mb-3 font-weight-normal">Rejestracja</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Edycja danych</h1>
         <label for="login">Login</label>
         <input type="text" class="form-control" id="loginSU" placeholder="login">
   </div>
-      <div class="form-group">
-        <label for="password">Hasło</label>
-        <input type="password" class="form-control" id="passwordSU" placeholder="hasło">
-  </div>
-
-      <div class="form-group">
-        <label for="passwordSUrepet">Powtórz hasło</label>
-        <input type="password" class="form-control" id="passwordSUrepet" placeholder="powtórzone hasło">
-  </div>
+ 
 
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -67,18 +58,17 @@
           <input type="text" class="form-control" id="faxSU" placeholder="fax">
     </div>
       </div>
-      
-       
-      <button type="submit" class="btn btn-lg btn-primary btn-block">Załóż konto</button>
-    </form>
-    
 
+
+      <button type="submit" class="btn btn-lg btn-primary btn-block">Edytuj dane</button>
+    </form>
+	
   </div>
 </template>
 
 <script>
   export default {
-  name: 'SingUp',
+  name: 'UserEdit',
   data(){
   return{}
   }
