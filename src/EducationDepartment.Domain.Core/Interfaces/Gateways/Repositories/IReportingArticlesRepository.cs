@@ -9,5 +9,6 @@ namespace EducationDepartment.Domain.Core.Interfaces.Gateways.Repositories
     public interface IReportingArticlesRepository
     {
         Task<List<ReportingArticle>> GetReportingArticles(DateTime from, DateTime to);
+        Task SeedData();
     }
 }

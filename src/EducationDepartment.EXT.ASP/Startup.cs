@@ -33,6 +33,7 @@ using EducationDepartment.Infrastructure.Entityframework.Helpers;
 using EducationDepartment.EXT.ASP.Extensions;
 using Microsoft.AspNetCore.Http;
 using EducationDepartment.Infrastructure.Entityframework.Data.EntityFramework.Repositories;
+using EducationDepartment.Domain.Core.Interfaces.Gateways.Repositories;
 
 namespace EducationDepartment.EXT.ASP
 {
@@ -124,6 +125,7 @@ namespace EducationDepartment.EXT.ASP
             });
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IReportingArticlesRepository), typeof(ReportingArticlesRepository));
 
             services.AddAutoMapper();
 

@@ -23,6 +23,14 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ArticleTypeFieldType>().HasKey(bc => new { bc.ArticleTypeId, bc.FieldTypeId });
+            modelBuilder.Entity<ArticleTypeFieldType>().HasOne(bc => bc.ArticleType).WithMany(b => b.ArticleTypeFieldTypes).HasForeignKey(bc => bc.ArticleTypeId);
+            modelBuilder.Entity<ArticleTypeFieldType>().HasOne(bc => bc.FieldType).WithMany(c => c.FieldTypeArticleType).HasForeignKey(bc => bc.FieldTypeId);
+            //builder.Entity<FieldType>().HasData(new FieldType { IsDeleted = false, Created = DateTime.Now, Modified = DateTime.Now, Name = "plainText", Options = "{}", Id = 1 });
+        }
 
         public override int SaveChanges()
         {

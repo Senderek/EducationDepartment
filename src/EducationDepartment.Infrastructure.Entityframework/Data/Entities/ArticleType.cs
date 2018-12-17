@@ -9,5 +9,6 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.Entities
     {
         public ICollection<ArticleTypeFieldType> ArticleTypeFieldTypes { get; set; }
         public ICollection<Article> Articles { get; set; }
+        public string Name { get; set; }
     }
 }

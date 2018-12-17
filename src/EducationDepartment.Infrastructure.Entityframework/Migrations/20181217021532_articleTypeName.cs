@@ -2,22 +2,21 @@
 
 namespace EducationDepartment.Infrastructure.Entityframework.Migrations
 {
-    public partial class Notifications2 : Migration
+    public partial class articleTypeName : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "DestinationsAsString",
-                table: "Notifications",
-                nullable: false,
-                defaultValue: "");
+                name: "Name",
+                table: "ArticleTypes",
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "DestinationsAsString",
-                table: "Notifications");
+                name: "Name",
+                table: "ArticleTypes");
         }
     }
 }

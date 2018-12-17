@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EducationDepartment.Domain.Core.Interfaces.Gateways.Repositories;
 using EducationDepartment.Infrastructure.Entityframework.Data.Entities;
 using EducationDepartment.Infrastructure.Entityframework.Data.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,15 @@ namespace EducationDepartment.EXT.ASP.Controllers
         private readonly IRepository<Article> articleRepository;
         private readonly IRepository<FieldType> fieldTypeRepo;
         private readonly IRepository<ArticleType> articleTypeRepo;
+        private readonly IReportingArticlesRepository d;
 
-        public ArticleController(IRepository<Article> _articleRepository, IRepository<FieldType> _fieldTypeRepo, IRepository<ArticleType> _articleTypeRepo)
+
+        public ArticleController(IRepository<Article> _articleRepository, IRepository<FieldType> _fieldTypeRepo, IRepository<ArticleType> _articleTypeRepo, IReportingArticlesRepository _d)
         {
             articleRepository = _articleRepository;
             fieldTypeRepo = _fieldTypeRepo;
             articleTypeRepo = _articleTypeRepo;
+            d = _d;
         }
 
         [HttpPost]
@@ -104,5 +108,13 @@ namespace EducationDepartment.EXT.ASP.Controllers
             }
             return Ok(fieldTypeRepo.GetAll());
         }
+        [Route("seed")]
+        [HttpGet]
+        public async Task<IActionResult> SeedData()
+        {
+            await d.SeedData();
+            return Ok();
+        }
+
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducationDepartment.Infrastructure.Entityframework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181126022642_Notifications")]
-    partial class Notifications
+    [Migration("20181217020417_many-tomany")]
+    partial class manytomany
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,19 +86,21 @@ namespace EducationDepartment.Infrastructure.Entityframework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ArticleTypeId");
+
                     b.Property<string>("AuthorId");
 
                     b.Property<DateTime>("Created");
 
                     b.Property<DateTime>("Modified");
 
-                    b.Property<int>("TypeId");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("ArticleTypeId");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Articles");
                 });
@@ -120,23 +122,11 @@ namespace EducationDepartment.Infrastructure.Entityframework.Migrations
 
             modelBuilder.Entity("EducationDepartment.Infrastructure.Entityframework.Data.Entities.ArticleTypeFieldType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ArticleId");
-
-                    b.Property<int?>("ArticleTypeId");
-
-                    b.Property<int>("DefaultPriority");
+                    b.Property<int>("ArticleTypeId");
 
                     b.Property<int>("FieldTypeId");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("ArticleTypeId");
+                    b.HasKey("ArticleTypeId", "FieldTypeId");
 
                     b.HasIndex("FieldTypeId");
 
@@ -200,6 +190,9 @@ namespace EducationDepartment.Infrastructure.Entityframework.Migrations
                     b.Property<string>("Content");
 
                     b.Property<DateTime>("Created");
+
+                    b.Property<string>("DestinationsAsString")
+                        .IsRequired();
 
                     b.Property<DateTime>("Modified");
 
@@ -323,26 +316,21 @@ namespace EducationDepartment.Infrastructure.Entityframework.Migrations
 
             modelBuilder.Entity("EducationDepartment.Infrastructure.Entityframework.Data.Entities.Article", b =>
                 {
+                    b.HasOne("EducationDepartment.Infrastructure.Entityframework.Data.Entities.ArticleType")
+                        .WithMany("Articles")
+                        .HasForeignKey("ArticleTypeId");
+
                     b.HasOne("EducationDepartment.Infrastructure.Entityframework.Data.Entities.AppUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
-
-                    b.HasOne("EducationDepartment.Infrastructure.Entityframework.Data.Entities.ArticleType", "Type")
-                        .WithMany("Articles")
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EducationDepartment.Infrastructure.Entityframework.Data.Entities.ArticleTypeFieldType", b =>
                 {
-                    b.HasOne("EducationDepartment.Infrastructure.Entityframework.Data.Entities.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EducationDepartment.Infrastructure.Entityframework.Data.Entities.ArticleType")
+                    b.HasOne("EducationDepartment.Infrastructure.Entityframework.Data.Entities.ArticleType", "ArticleType")
                         .WithMany("ArticleTypeFieldTypes")
-                        .HasForeignKey("ArticleTypeId");
+                        .HasForeignKey("ArticleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("EducationDepartment.Infrastructure.Entityframework.Data.Entities.FieldType", "FieldType")
                         .WithMany("FieldTypeArticleType")

@@ -1,5 +1,7 @@
 ﻿using EducationDepartment.Domain.Core.Domain.Entities;
 using EducationDepartment.Domain.Core.Interfaces.Gateways.Repositories;
+using EducationDepartment.Infrastructure.Entityframework.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,12 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
     public class ReportingArticlesRepository : IReportingArticlesRepository
     {
         private readonly ApplicationDbContext context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ReportingArticlesRepository(ApplicationDbContext _context)
+        public ReportingArticlesRepository(ApplicationDbContext _context, UserManager<AppUser> userManager)
         {
             context = _context;
+            _userManager = userManager;
         }
 
         public async Task<List<ReportingArticle>> GetReportingArticles(DateTime from, DateTime to)
@@ -28,6 +32,37 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
                 result.Add(newArticle);
             }
             return result;
+        }
+        public async Task SeedData()
+        {
+            var AppUser = new AppUser() { FirstName = "Admin", LastName = "główny", Email = "edudepms@gmail.com", UserName = "Admin1" };
+            var result = await _userManager.CreateAsync(AppUser, "Admin12345");
+
+            var tags = new[]
+            {
+                new FieldType { Name="plainText",Options="{}" },
+            };
+
+            var posts = new[]
+            {
+                new ArticleType {Name="prostyTekst"  },
+            };
+
+            context.AddRange(
+                new ArticleTypeFieldType { ArticleType = posts[0], FieldType = tags[0] });
+            context.SaveChanges();
+
+            context.Add(new Article
+            {
+                Author = AppUser,
+                Name = "initialArticle",
+                ContentFields = new[]
+                {
+                    new Field{Content="raz dwa trzy",FieldType= tags[0],Priority=0 }
+                }
+            });
+
+            context.SaveChanges();
         }
     }
 }

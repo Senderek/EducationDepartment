@@ -22,7 +22,7 @@ namespace EducationDepartment.EXT.ASP.Controllers
         }
 
         [HttpGet]
-        public async Task<FileContentResult> GetReport(ReportRequest request)
+        public async Task<IActionResult> GetReport(ReportRequest request)
         {
             await _reportUseCase.Handle(request, _reportPresenter);
             return _reportPresenter.ContentResult;           

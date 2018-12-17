@@ -20,14 +20,12 @@ namespace EducationDepartment.Domain.Core.UseCases
     public class CreateReportUseCase : IReportUseCase
     {
         private readonly IReportingArticlesRepository _userRepository;
-        private readonly IReportFileFactory _fileFactory;
         private readonly IExcelReportSrv _excelFactory;
         private readonly IWordReportSrv _wordFactory;
 
-        public CreateReportUseCase(IReportingArticlesRepository userRepository, IReportFileFactory fileFactory, IExcelReportSrv excelFactory, IWordReportSrv wordFactory)
+        public CreateReportUseCase(IReportingArticlesRepository userRepository, IExcelReportSrv excelFactory, IWordReportSrv wordFactory)
         {
             _userRepository = userRepository;
-            _fileFactory = fileFactory;
             _excelFactory = excelFactory;
             _wordFactory = wordFactory;
         }
@@ -44,14 +42,14 @@ namespace EducationDepartment.Domain.Core.UseCases
                         case FileType.docx:
                             _wordFactory.CreateReport(stream, articlesToReport);
                             stream.Position = 0;
-                            outputPort.Handle(new ReportResponse(stream.ToArray(), message.FileType));
-                            break;
+                            outputPort.Handle(new ReportResponse(stream.ToArray(), message.FileType, true));
+                            return true;
                         case FileType.pdf:
-                            break;
+                            return false;
                         case FileType.xlsx:
                             _excelFactory.CreateReport(stream, articlesToReport);
-                            outputPort.Handle(new ReportResponse(stream.ToArray(), message.FileType));
-                            break;
+                            outputPort.Handle(new ReportResponse(stream.ToArray(), message.FileType, true));
+                            return true;
                     }
                 }
             }
