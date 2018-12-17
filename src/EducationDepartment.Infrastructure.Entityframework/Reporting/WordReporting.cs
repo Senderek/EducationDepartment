@@ -21,9 +21,46 @@ namespace EducationDepartment.Infrastructure.Entityframework.Reporting
 
                 // Create the document structure and add some text.
                 mainPart.Document = new Document();
-                Body docBody = new Body();
+                var docBody = mainPart.Document.AppendChild(new Body());
 
                 Table table = new Table();
+
+                TableProperties tblProperties = new TableProperties();
+                TableBorders tblBorders = new TableBorders();
+
+                TopBorder topBorder = new TopBorder();
+                topBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+                topBorder.Color = "CC0000";
+                tblBorders.AppendChild(topBorder);
+
+                BottomBorder bottomBorder = new BottomBorder();
+                bottomBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+                bottomBorder.Color = "CC0000";
+                tblBorders.AppendChild(bottomBorder);
+
+                RightBorder rightBorder = new RightBorder();
+                rightBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+                rightBorder.Color = "CC0000";
+                tblBorders.AppendChild(rightBorder);
+
+                LeftBorder leftBorder = new LeftBorder();
+                leftBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+                leftBorder.Color = "CC0000";
+                tblBorders.AppendChild(leftBorder);
+
+                InsideHorizontalBorder insideHBorder = new InsideHorizontalBorder();
+                insideHBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+                insideHBorder.Color = "CC0000";
+                tblBorders.AppendChild(insideHBorder);
+
+                InsideVerticalBorder insideVBorder = new InsideVerticalBorder();
+                insideVBorder.Val = new EnumValue<BorderValues>(BorderValues.Thick);
+                insideVBorder.Color = "CC0000";
+                tblBorders.AppendChild(insideVBorder);
+
+                //// Add the table borders to the properties
+                tblProperties.AppendChild(tblBorders);
+                table.AppendChild(tblProperties);
 
                 TableRow tr1 = new TableRow();
 
@@ -41,6 +78,7 @@ namespace EducationDepartment.Infrastructure.Entityframework.Reporting
 
                 TableCell tc12 = new TableCell();
                 Paragraph p12 = new Paragraph();
+                
                 Run r12 = new Run();
                 RunProperties rp12 = new RunProperties();
                 rp12.Bold = new Bold();
@@ -64,6 +102,7 @@ namespace EducationDepartment.Infrastructure.Entityframework.Reporting
                     Paragraph pi2 = new Paragraph(new Run(new Text(articles[i].Date.ToLocalTime().ToString("dd-MM-yyyy"))));
                     tr_i2.Append(pi2);
                     tr_i.Append(tr_i2);
+                    table.Append(tr_i);
                 }
 
                 // Add your table to docx body
@@ -73,8 +112,9 @@ namespace EducationDepartment.Infrastructure.Entityframework.Reporting
                 ParagraphProperties pp22 = new ParagraphProperties();
                 pp22.Justification = new Justification() { Val = JustificationValues.Center };
                 summaryPar.Append(pp22);
-                summaryPar.Append(new Run(new Text("Razem artykułów: "+ articles.Count.ToString())));
+                summaryPar.Append(new Run(new Text("Razem artykułów: " + articles.Count.ToString())));
                 docBody.Append(summaryPar);
+                wordDocument.Save();
 
             }
         }
