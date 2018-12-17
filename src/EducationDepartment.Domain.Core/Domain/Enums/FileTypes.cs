@@ -4,10 +4,10 @@ using System.Text;
 
 namespace EducationDepartment.Domain.Core.Domain.Enums
 {
-    public enum FileTypes
+    public enum FileType
     {
-        Docx,
-        Pdf,
-
+        docx,
+        pdf,
+        xlsx,
     }
 }

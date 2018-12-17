@@ -32,6 +32,7 @@ using Autofac.Extensions.DependencyInjection;
 using EducationDepartment.Infrastructure.Entityframework.Helpers;
 using EducationDepartment.EXT.ASP.Extensions;
 using Microsoft.AspNetCore.Http;
+using EducationDepartment.Infrastructure.Entityframework.Data.EntityFramework.Repositories;
 
 namespace EducationDepartment.EXT.ASP
 {
@@ -122,6 +123,8 @@ namespace EducationDepartment.EXT.ASP
                     });
             });
 
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             services.AddAutoMapper();
 
             services.AddSwaggerGen(c =>
@@ -154,6 +157,7 @@ namespace EducationDepartment.EXT.ASP
             {
                 app.UseDeveloperExceptionPage();
             }
+            
 
             app.UseExceptionHandler(
                 builder =>
@@ -163,6 +167,7 @@ namespace EducationDepartment.EXT.ASP
                             {
                                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                                 context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                                context.Response.ContentType = "application/json";
 
                                 var error = context.Features.Get<IExceptionHandlerFeature>();
                                 if (error != null)
