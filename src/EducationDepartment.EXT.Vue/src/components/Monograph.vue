@@ -1,42 +1,46 @@
 ﻿<template>
-  <div class="partOfBook">
+  <div class="monograph">
     <Alert v-if="alert" v-bind:message="alert" />
-    <h3>Dodaj część książki</h3>
+    <h3>Dodaj monografie</h3>
 
-    <form style ="margin-top:20px" v-on:submit="addPartOfBook">
+    <form style ="margin-top:20px" v-on:submit="addMonograph">
       <div class="form-group">
-        <label for="autorImput">Autor</label>
-        <input type="text" class="form-control"   placeholder="autor" v-model="partOfBook.autor">
-          </br>
-
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="autor">Autor</label>
+            <input type="text" class="form-control"   placeholder="autor" v-model="monograph.autor">
+          </div>
+          <div class="form-group col-md-6">
+            </br>
+            <button type="button" class="btn btn-success mt-2">Dodaj siebie</button>
+          </div>
+        </div>
           <label for="titleImput">Tytuł</label>
-          <input type="text" class="form-control"   placeholder="tytuł" v-model="partOfBook.title">
+          <input type="text" class="form-control"   placeholder="tytuł" v-model="monograph.title">
             </br>
 
             <label for="descriptionBook">Opis</label>
             </br>
-            <textarea class="form-control" v-model="partOfBook.description" rows="5"></textarea>
+            <textarea class="form-control" v-model="monograph.description" rows="5"></textarea>
             </br>
 
             <label for="example-date-input"  >Data</label>
             </br>
 
-            <input class="form-control" type="date" value="2018-12-19" v-model="partOfBook.date">
+            <input class="form-control" type="date" value="2018-12-19" v-model="monograph.date">
               </br>
 
-            <label for="pagesImput">Strony</label>
-            <input type="text" class="form-control"  v-model="partOfBook.pages" placeholder="strony">
-              </br>
+          
 
             
 
 
               <label for="cityImput">Miasto</label>
-              <input type="text" class="form-control"   placeholder="miasto" v-model="partOfBook.city">
+              <input type="text" class="form-control"   placeholder="miasto" v-model="monograph.city">
                 </br>
 
                 <label for="publisherImput">Wydawca</label>
-                <input type="text" class="form-control"   placeholder="wydawca" v-model="partOfBook.publisher" >
+                <input type="text" class="form-control"   placeholder="wydawca" v-model="monograph.publisher" >
                   </br>
 
 
@@ -63,7 +67,7 @@
                     <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
 
 
-                    <button   class="btn btn-lg btn-primary btn-block">Dodaj część książki</button>
+                    <button   class="btn btn-lg btn-primary btn-block">Dodaj monografię</button>
 
 
                   </div>
@@ -76,35 +80,34 @@
 <script>
   import Alert from "./Alert"
   export default {
-  name: 'PartOfBook',
+  name: 'Monograph',
   data(){
   return {
-  partOfBook: {},
+  monograph: {},
   alert: ""
   }
   },
   methods: {
-  addPartOfBook(e) {
+  addMonograph(e) {
   if (
-  !this.partOfBook.autor ||
-  !this.partOfBook.title
+  !this.monograph.autor ||
+  !this.monograph.title
   ) {
   this.alert = "Autor i tytuł to pola wymagane";
   } else {
-  let newPartOfBook = {
-  Autor: this.partOfBook.autor,
-  Title: this.partOfBook.title,
-  Description: this.partOfBook.description,
-  Date: this.partOfBook.date,
-  City: this.partOfBook.city,
-  Pages: this.partOfBook.pages,
-  Publisher: this.partOfBook.publisher
+  let newMonograph = {
+  Autor: this.monograph.autor,
+  Title: this.monograph.title,
+  Description: this.monograph.description,
+  Date: this.monograph.date,
+  City: this.monograph.city,
+  Publisher: this.monograph.publisher
 
 
 
 
   }
-  this.$http.post('http://localhost:50906/api/accounts', newPartOfBook)
+  this.$http.post('http://localhost:50906/api/accounts', newMonograph)
   .then(function(response){
   this.$router.push({path: '/', query: {alert: 'Dodano część książki'}});
   });

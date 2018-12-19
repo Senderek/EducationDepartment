@@ -5,9 +5,16 @@
 
     <form style ="margin-top:20px" v-on:submit="addRaport">
       <div class="form-group">
-        <label for="autorImput">Autor</label>
-        <input type="text" class="form-control"   placeholder="autor" v-model="raport.autor">
-          </br>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="autor">Autor</label>
+            <input type="text" class="form-control"   placeholder="autor" v-model="raport.autor">
+          </div>
+          <div class="form-group col-md-6">
+            </br>
+            <button type="button" class="btn btn-success mt-2">Dodaj siebie</button>
+          </div>
+        </div>
 
           <label for="titleImput">Tytuł</label>
           <input type="text" class="form-control"   placeholder="tytuł" v-model="raport.title">

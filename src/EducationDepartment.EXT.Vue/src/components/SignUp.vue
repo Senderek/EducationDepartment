@@ -1,5 +1,5 @@
 ﻿<template>
-  <div class="signUp">
+  <div class="signUp" style="margin-top:50px">
 
     <Alert v-if="alert" v-bind:message="alert" />
     <h1 class="h3 mb-3 font-weight-normal">Rejestracja</h1>
@@ -61,11 +61,11 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="phoneSU">Telefon</label>
-          <input type="text" class="form-control" id="phoneSU" placeholder="telefon">
+          <input type="text" class="form-control"   placeholder="telefon" v-model="account.phone">
     </div>
         <div class="form-group col-md-6">
           <label for="faxSU">FAX</label>
-          <input type="text" class="form-control" id="faxSU" placeholder="fax">
+          <input type="text" class="form-control"   placeholder="fax" v-model="account.fax">
     </div>
       </div>
 
@@ -98,15 +98,34 @@
   !this.account.lastname
   ) {
   this.alert = "Wypełnij wszystkie wymagane pola";
-  } else {
+  } else
+  if(this.account.login.length >15){
+  this.alert = "Za długi login";
+  } else
+  if(this.account.firstname.length >30){
+  this.alert = "Za długie imię";
+  } else
+  if(this.account.lastname.length >50){
+  this.alert = "Za długie nazwisko";
+  } else
+  if(this.account.email.length >30){
+  this.alert = "Za długi email";
+  } else
+  if(this.account.phone.length >10){
+  this.alert = "Za długi nr telefonu";
+  } else
+  if(this.account.fax.length >10){
+  this.alert = "Za długi FAX";
+  } else
+  {
   let newAccount = {
-  FirstName: this.account.firstname,
-  LastName: this.account.lastname,
-  Email: this.account.email,
-  UserName: this.account.login,
-  Password: this.account.password
+  firstName: this.account.firstname,
+  lastName: this.account.lastname,
+  email: this.account.email,
+  userName: this.account.login,
+  password: this.account.password
   }
-  this.$http.post('http://localhost:50906/api/accounts', newAccount)
+  this.$http.post('https://localhost:44335//api/Accounts', newAccount)
   .then(function(response){
   this.$router.push({path: '/', query: {alert: 'Konto utworzone'}});
   });
