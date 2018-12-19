@@ -76,6 +76,18 @@ namespace EducationDepartment.Infrastructure.Entityframework.Reporting
                 tc11.Append(p11);
                 tr1.Append(tc11);
 
+                TableCell tc13 = new TableCell();
+                Paragraph p13 = new Paragraph();
+                Run r13 = new Run();
+                RunProperties rp13 = new RunProperties();
+                rp13.Bold = new Bold();
+                r13.Append(rp13);
+                r13.Append(new Text("Tytuł publikacji"));
+                p13.Append(r13);
+
+                tc13.Append(p13);
+                tr1.Append(tc13);
+
                 TableCell tc12 = new TableCell();
                 Paragraph p12 = new Paragraph();
                 
@@ -97,6 +109,11 @@ namespace EducationDepartment.Infrastructure.Entityframework.Reporting
                     Paragraph pi1 = new Paragraph(new Run(new Text(articles[i].Author)));
                     tr_i1.Append(pi1);
                     tr_i.Append(tr_i1);
+
+                    TableCell tr_i3 = new TableCell();
+                    Paragraph pi3 = new Paragraph(new Run(new Text(articles[i].Title)));
+                    tr_i3.Append(pi3);
+                    tr_i.Append(tr_i3);
 
                     TableCell tr_i2 = new TableCell();
                     Paragraph pi2 = new Paragraph(new Run(new Text(articles[i].Date.ToLocalTime().ToString("dd-MM-yyyy"))));

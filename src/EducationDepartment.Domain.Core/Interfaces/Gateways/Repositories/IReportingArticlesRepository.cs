@@ -10,5 +10,7 @@ namespace EducationDepartment.Domain.Core.Interfaces.Gateways.Repositories
     {
         Task<List<ReportingArticle>> GetReportingArticles(DateTime from, DateTime to);
         Task SeedData();
+        Task BoundAritcleTypeToFieldTypes(int articleTypeId, List<int> fieldTypeIds);
+
     }
 }

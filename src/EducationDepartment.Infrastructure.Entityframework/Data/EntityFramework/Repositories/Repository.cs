@@ -39,7 +39,7 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
             return await entities.SingleOrDefaultAsync(s => s.Id == id);
         }
 
-        public void Insert(T entity)
+        public int Insert(T entity)
         {
             if (entity == null)
             {
@@ -48,8 +48,9 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
             entity.Created = DateTime.UtcNow;
             entities.Add(entity);
             context.SaveChanges();
+            return entity.Id;
         }
-        public async Task InsertAsync(T entity)
+        public async Task<int> InsertAsync(T entity)
         {
             if (entity == null)
             {
@@ -58,6 +59,7 @@ namespace EducationDepartment.Infrastructure.Entityframework.Data.EntityFramewor
             entity.Created = DateTime.UtcNow;
             await entities.AddAsync(entity).ConfigureAwait(false);
             await context.SaveChangesAsync().ConfigureAwait(false);
+            return entity.Id;
         }
 
         public void Update(T entity)

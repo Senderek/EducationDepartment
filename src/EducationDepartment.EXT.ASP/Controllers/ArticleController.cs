@@ -77,16 +77,16 @@ namespace EducationDepartment.EXT.ASP.Controllers
 
         }
 
-        [HttpPost("articleType")]
-        public async Task<IActionResult> CreateArticleType(ArticleType type)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            await articleTypeRepo.InsertAsync(type);
-            return Ok(type);
-        }
+        //[HttpPost("articleType")]
+        //public async Task<IActionResult> CreateArticleType(ArticleType type)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    await articleTypeRepo.InsertAsync(type);
+        //    return Ok(type);
+        //}
 
         [HttpGet("articleType/list")]
         public async Task<IActionResult> GetAllArticleTypes()
@@ -108,6 +108,47 @@ namespace EducationDepartment.EXT.ASP.Controllers
             }
             return Ok(fieldTypeRepo.GetAll());
         }
+
+        [HttpPost]
+        [Route("fieldType")]
+        public async Task<IActionResult> PostFieldType(int? id, string name, string options)
+        {
+            var at = new FieldType { Name = name, Options = options };
+            if (id != null)
+            {
+                at.Id = (int)id;
+                await fieldTypeRepo.UpdateAsync(at);
+            }
+            else
+            {
+                await fieldTypeRepo.InsertAsync(at);
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("articleType")]
+        public async Task<IActionResult> PostArticleType(int? id, string name, List<int> fieldTypesIds)
+        {
+            var at = new ArticleType { Name = name };
+            int resultId = 0;
+            if (id != null)
+            {
+                at.Id = (int)id;
+                resultId = (int)id;
+                await articleTypeRepo.UpdateAsync(at);
+            }
+            else
+            {
+                resultId = await articleTypeRepo.InsertAsync(at);
+            }
+            if (fieldTypesIds.Count > 0 && resultId > 0)
+            {
+                await d.BoundAritcleTypeToFieldTypes(resultId, fieldTypesIds);
+            }
+            return Ok();
+        }
+
         [Route("seed")]
         [HttpGet]
         public async Task<IActionResult> SeedData()
