@@ -43,6 +43,21 @@
     <Content Include="src\components\Article.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\Example.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\Notifications.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\OtherTypesPublication.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\PublicationShow.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\PublicationTypes.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\Book.vue">
       <SubType>Code</SubType>
     </Content>
@@ -52,13 +67,22 @@
     <Content Include="src\components\ConferenceArticle.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\NewNotification.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\NewTypePublication.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\Publications.vue" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="src\components\PartOfBook.vue">
+    <Content Include="src\components\Monograph.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\Patent.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\PublicationTypesEdit.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\Raport.vue">
@@ -68,6 +92,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\SignUp.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\TypeSelector.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\UserEdit.vue">
@@ -80,9 +107,36 @@
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
+    <Folder Include="src\_store\" />
+    <Folder Include="src\_services\" />
+    <Folder Include="src\_helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\main.js" />
+    <Compile Include="src\_helpers\auth-header.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\_helpers\main.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\_helpers\router.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\_services\user.service.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\_store\alert.module.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\_store\authentication.module.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\_store\index.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\_store\user.module.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="vue.config.js">
       <SubType>Code</SubType>
     </Compile>

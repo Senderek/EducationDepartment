@@ -5,9 +5,19 @@
 
     <form style ="margin-top:20px" v-on:submit="addArticle">
       <div class="form-group">
-        <label for="autorImput">Autor</label>
-        <input type="text" class="form-control"   placeholder="autor" v-model="article.autor">
+       
+          
+          
+            <div class="form-row">
+          <div class="form-group col-md-6">
+          <label for="autor">Autor</label>
+          <input type="text" class="form-control"   placeholder="autor" v-model="article.autor">
+          </div>
+         <div class="form-group col-md-6">
           </br>
+          <button type="button" class="btn btn-success mt-2">Dodaj siebie</button>
+          </div>
+         </div>
 
           <label for="titleImput">Tytuł</label>
           <input type="text" class="form-control"   placeholder="tytuł" v-model="article.title">
@@ -93,17 +103,10 @@
   this.alert = "Autor i tytuł to pola wymagane";
   } else {
   let newArticle = {
-  Autor: this.article.autor,
-  Title: this.article.title,
-  Description: this.article.description,
-  MagazinName: this.article.magazinName,
-  Date: this.article.date,
-  Pages: this.article.pages
-
-
-
+  ContentFields: [{ 
+  }]
   }
-  this.$http.post('http://localhost:50906/api/accounts', newArticle)
+  this.$http.post('http://localhost:50906/api/Article/', newArticle)
   .then(function(response){
   this.$router.push({path: '/', query: {alert: 'Dodano artykuł'}});
   });

@@ -5,9 +5,16 @@
 
     <form style ="margin-top:20px" v-on:submit="addPatent">
       <div class="form-group">
-        <label for="autorImput">Wynalazca</label>
-        <input type="text" class="form-control"   placeholder="wynalazca"  v-model="patent.inventor">
-          </br>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="autor">Wynalazca</label>
+            <input type="text" class="form-control"   placeholder="wynalazca" v-model="patent.inventor">
+          </div>
+          <div class="form-group col-md-6">
+            </br>
+            <button type="button" class="btn btn-success mt-2">Dodaj siebie</button>
+          </div>
+        </div>
 
           <label for="titleImput">Tytuł</label>
           <input type="text" class="form-control"   placeholder="tytuł"  v-model="patent.title">
